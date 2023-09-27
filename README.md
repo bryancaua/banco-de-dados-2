@@ -111,3 +111,22 @@ END;
 DELIMITER ;
 
 CALL sp_autorMaisAntigo();
+
+-- exercício 9
+
+DELIMITER //
+CREATE PROCEDURE sp_ListarAutores()
+BEGIN
+	SELECT Nome, Sobrenome
+    FROM Autor;
+END;
+//
+DELIMITER ;
+
+-- DELIMITER // : cria um delimitador temporário que pode utilizar qualquer símbolo
+-- CREATE PROCEDURE sp_ListarAutores() : cria o próprio stored procedure
+-- BEGIN: inicia um bloco de stored procedure
+-- SELECT Nome, Sobrenome FROM Autor : seleciona a coluna nome e sobrenome da tabela autor
+-- END : encerra o bloco de uma stored procedure
+-- DELIMITER ; : fecha um delimitador com o padrão que é o símbolo de ponto e vírgula
+-- CALL sp_ListarAutores(); : chama a procedure e devolve o resultado do select
