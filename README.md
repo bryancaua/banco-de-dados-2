@@ -25,7 +25,6 @@ DELIMITER //
 CREATE PROCEDURE sp_VerificarLivrosCategoria(IN nome_categoria VARCHAR(225), OUT possui_livros ENUM('Sim possui', 'Não possui'))
 BEGIN
     DECLARE quantidade_livros INT;
-
 	SELECT COUNT(l.Categoria_ID) AS quantidade_livros
     INTO quantidade_livros
     FROM Categoria c
@@ -44,3 +43,16 @@ DELIMITER ;
 
 CALL sp_VerificarLivrosCategoria('Romance', @possui_livros);
 SELECT @possui_livros;
+
+
+-- exercício 5
+
+CREATE PROCEDURE sp_LivrosAteAno INT
+BEGIN
+    SELECT  l.Titulo, l.Ano_Publicacao
+    FROM Livro l
+    WHERE l.Ano_Publicacao <= ano
+END;
+//
+DELIMITER ;
+CALL sp_LivrosAteAno(2010);
