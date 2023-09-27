@@ -130,3 +130,18 @@ DELIMITER ;
 -- END : encerra o bloco de uma stored procedure
 -- DELIMITER ; : fecha um delimitador com o padrão que é o símbolo de ponto e vírgula
 -- CALL sp_ListarAutores(); : chama a procedure e devolve o resultado do select
+
+-- exercício 10
+
+DELIMITER //
+CREATE PROCEDURE sp_LivrosESeusAutores()
+BEGIN
+	SELECT l.Titulo, a.Nome, a.Sobrenome
+    FROM Livro l
+    INNER JOIN Autor_Livro ON l.Livro_ID = Autor_Livro.Livro_ID
+    INNER JOIN Autor a ON a.Autor_ID = Autor_Livro.Autor_ID;
+END;
+//
+DELIMITER ;
+
+CALL sp_LivrosESeusAutores();
