@@ -5,5 +5,16 @@ BEGIN
 	SELECT l.Titulo, c.Nome AS Categoria
     FROM Livro l
     INNER JOIN Categoria c ON li.Categoria_ID = c.Categoria_ID
-    WHERE c.Nome = nome_categoria;
+    WHERE ca.Nome = nome_categoria;
+END;
+
+-- exercício 3
+DELIMITER //
+CREATE PROCEDURE sp_ContarLivrosPorCategoria(IN nome_categoria VARCHAR(225))
+BEGIN
+	SELECT ca.Nome, COUNT(l.Titulo) AS quantidade_livros
+    FROM Livro l
+    INNER JOIN Categoria c ON li.Categoria_ID = c.Categoria_ID
+    WHERE ca.Nome = nome_categoria
+    GROUP BY ca.Nome;
 END;
