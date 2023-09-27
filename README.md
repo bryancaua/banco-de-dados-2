@@ -72,3 +72,26 @@ DELIMITER ;
 
 CALL sp_TitulosPorCategoria('história');
 
+-- exercício 7
+
+DELIMITER //
+CREATE PROCEDURE sp_AdicionarLivro(IN nome_livro VARCHAR(250))
+BEGIN
+	DECLARE por_livros INT;
+    SELECT l.Livro_ID 
+    INTO por_livros
+    FROM Livro l
+    WHERE l.Titulo = nome_livro   
+    IF por_livros IS NOT NULL THEN
+		SIGNAL SQLSTATE '45000'
+		SET MESSAGE_TEXT = 'Livro existente';
+	ELSE
+		INSERT INTO Livro (Titulo)
+		VALUES (nome_livro);
+	END IF;
+END;
+//
+DELIMITER ;
+
+CALL sp_AdicionarLivro('As Vantagens de ser invisível');
+SELECT l.Titulo FROM Livro l;
